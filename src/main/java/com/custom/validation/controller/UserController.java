@@ -32,4 +32,14 @@ public class UserController {
     public ResponseEntity<User> getUser(@PathVariable int id) throws UserNotFoundException {
         return ResponseEntity.ok(service.getUser(id));
     }
+
+    @GetMapping("/userid")
+    public ResponseEntity<User> getUserById(@RequestParam (name = "userid") Integer id ) throws UserNotFoundException {
+        return new ResponseEntity<>(service.getUser(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/idandname")
+    public ResponseEntity<User> getUserByUserIdAndName(@RequestParam (name = "userid") Integer id, @RequestParam (name = "username") String username) {
+        return new ResponseEntity<>(service.getUserByUserIdAndName(id, username), HttpStatus.OK);
+    }
 }

@@ -27,10 +27,22 @@ public class UserService {
     public User getUser(int id) throws UserNotFoundException {
         User user = userRepository.findByUserId(id);
 
-        if(user != null){
+        if (user != null) {
             return user;
-        }else{
-            throw new UserNotFoundException("User Not Found with id :" +id);
+        } else {
+            throw new UserNotFoundException("User Not Found with id :" + id);
         }
+    }
+
+    public User getUserByUserIdAndName(Integer id, String name) {
+        List<User> users = userRepository.findAll();
+        User user = null;
+        for (User u : users) {
+            if (u.getUserId() == id && u.getName().equalsIgnoreCase(name)) {
+                user = u;
+                break;
+            }
+        }
+        return user;
     }
 }
