@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -41,5 +42,10 @@ public class UserController {
     @GetMapping("/idandname")
     public ResponseEntity<User> getUserByUserIdAndName(@RequestParam (name = "userid") Integer id, @RequestParam (name = "username") String username) {
         return new ResponseEntity<>(service.getUserByUserIdAndName(id, username), HttpStatus.OK);
+    }
+
+    @GetMapping("/idandname8")
+    public ResponseEntity<Optional<User>> getUserByUserIdAndNameJava8(@RequestParam (name = "userid") Integer id, @RequestParam (name = "username") String username) {
+        return new ResponseEntity<>(service.getUserByUserIdAndNameStream(id, username), HttpStatus.OK);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -44,5 +45,11 @@ public class UserService {
             }
         }
         return user;
+    }
+
+    public Optional<User> getUserByUserIdAndNameStream(Integer id, String name) {
+        List<User> users = userRepository.findAll();
+        Optional<User> filterUser = users.stream().filter(user -> user.getUserId() == id && user.getName().equalsIgnoreCase(name)).findAny();
+        return filterUser;
     }
 }
