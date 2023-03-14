@@ -5,6 +5,9 @@ import com.custom.validation.entity.User;
 import com.custom.validation.exception.UserNotFoundException;
 import com.custom.validation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,5 +54,19 @@ public class UserService {
         List<User> users = userRepository.findAll();
         Optional<User> filterUser = users.stream().filter(user -> user.getUserId() == id && user.getName().equalsIgnoreCase(name)).findAny();
         return filterUser;
+    }
+
+    public List<User> sortFields(String filed) {
+        return userRepository.findAll(Sort.by(Sort.Direction.ASC, filed));
+    }
+
+    public Page<User> userPagination(int offset, int pageSize){
+        Page<User> users = userRepository.findAll(PageRequest.of(offset, pageSize));
+        return users;
+    }
+
+    public Page<User> userPaginationAndSorting(int offset, int pageSize, String filedName){
+        Page<User> users = userRepository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(filedName)));
+        return users;
     }
 }

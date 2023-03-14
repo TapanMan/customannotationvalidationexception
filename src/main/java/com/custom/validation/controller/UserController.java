@@ -6,6 +6,7 @@ import com.custom.validation.exception.UserNotFoundException;
 import com.custom.validation.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,17 +36,32 @@ public class UserController {
     }
 
     @GetMapping("/userid")
-    public ResponseEntity<User> getUserById(@RequestParam (name = "userid") Integer id ) throws UserNotFoundException {
+    public ResponseEntity<User> getUserById(@RequestParam(name = "userid") Integer id) throws UserNotFoundException {
         return new ResponseEntity<>(service.getUser(id), HttpStatus.OK);
     }
 
     @GetMapping("/idandname")
-    public ResponseEntity<User> getUserByUserIdAndName(@RequestParam (name = "userid") Integer id, @RequestParam (name = "username") String username) {
+    public ResponseEntity<User> getUserByUserIdAndName(@RequestParam(name = "userid") Integer id, @RequestParam(name = "username") String username) {
         return new ResponseEntity<>(service.getUserByUserIdAndName(id, username), HttpStatus.OK);
     }
 
     @GetMapping("/idandname8")
-    public ResponseEntity<Optional<User>> getUserByUserIdAndNameJava8(@RequestParam (name = "userid") Integer id, @RequestParam (name = "username") String username) {
+    public ResponseEntity<Optional<User>> getUserByUserIdAndNameJava8(@RequestParam(name = "userid") Integer id, @RequestParam(name = "username") String username) {
         return new ResponseEntity<>(service.getUserByUserIdAndNameStream(id, username), HttpStatus.OK);
+    }
+
+    @GetMapping("/sorting")
+    public ResponseEntity<List<User>> sortingFields(@RequestParam(name = "fieldName") String filedName) {
+        return new ResponseEntity<>(service.sortFields(filedName), HttpStatus.OK);
+    }
+
+    @GetMapping("/pagination")
+    public ResponseEntity<Page<User>> userPagination(@RequestParam(name = "pageNum") Integer pageNumber, @RequestParam(name = "pageSize") Integer pageSize) {
+        return new ResponseEntity<>(service.userPagination(pageNumber, pageSize), HttpStatus.OK);
+    }
+
+    @GetMapping("/paginationsorting")
+    public ResponseEntity<Page<User>> userPaginationAndSorting(@RequestParam(name = "pageNum") Integer pageNumber, @RequestParam(name = "pageSize") Integer pageSize, @RequestParam(name ="fieldName") String fieldName) {
+        return new ResponseEntity<>(service.userPaginationAndSorting(pageNumber, pageSize, fieldName), HttpStatus.OK);
     }
 }
