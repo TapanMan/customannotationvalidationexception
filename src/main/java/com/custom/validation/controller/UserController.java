@@ -61,7 +61,13 @@ public class UserController {
     }
 
     @GetMapping("/paginationsorting")
-    public ResponseEntity<Page<User>> userPaginationAndSorting(@RequestParam(name = "pageNum") Integer pageNumber, @RequestParam(name = "pageSize") Integer pageSize, @RequestParam(name ="fieldName") String fieldName) {
+    public ResponseEntity<Page<User>> userPaginationAndSorting(@RequestParam(name = "pageNum", defaultValue = "0") Integer pageNumber, @RequestParam(name = "pageSize", defaultValue = "2") Integer pageSize, @RequestParam(name = "fieldName", defaultValue = "name") String fieldName) {
         return new ResponseEntity<>(service.userPaginationAndSorting(pageNumber, pageSize, fieldName), HttpStatus.OK);
+    }
+
+    // Check the  service class for this updateUser() method
+    @PutMapping("/{uid}")
+    public ResponseEntity<User> updateUser(@PathVariable int uid, @RequestBody User user) {
+        return new ResponseEntity<>(service.updateUserDetails(uid, user), HttpStatus.OK);
     }
 }

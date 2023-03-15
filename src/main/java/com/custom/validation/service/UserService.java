@@ -60,13 +60,18 @@ public class UserService {
         return userRepository.findAll(Sort.by(Sort.Direction.ASC, filed));
     }
 
-    public Page<User> userPagination(int offset, int pageSize){
+    public Page<User> userPagination(int offset, int pageSize) {
         Page<User> users = userRepository.findAll(PageRequest.of(offset, pageSize));
         return users;
     }
 
-    public Page<User> userPaginationAndSorting(int offset, int pageSize, String filedName){
+    public Page<User> userPaginationAndSorting(int offset, int pageSize, String filedName) {
         Page<User> users = userRepository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(filedName)));
         return users;
+    }
+
+    public User updateUserDetails(int id, User user) {
+        User updatedUser = userRepository.findByUserId(id);
+        return userRepository.save(updatedUser);
     }
 }
