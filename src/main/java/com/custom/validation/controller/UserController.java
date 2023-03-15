@@ -65,7 +65,6 @@ public class UserController {
         return new ResponseEntity<>(service.userPaginationAndSorting(pageNumber, pageSize, fieldName), HttpStatus.OK);
     }
 
-    // Check the  service class for this updateUser() method
     @PutMapping("/{uid}")
     public ResponseEntity<User> updateUser(@PathVariable int uid, @RequestBody User user) {
         return new ResponseEntity<>(service.updateUserDetails(uid, user), HttpStatus.OK);

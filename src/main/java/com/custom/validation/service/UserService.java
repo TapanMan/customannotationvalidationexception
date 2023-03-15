@@ -72,6 +72,12 @@ public class UserService {
 
     public User updateUserDetails(int id, User user) {
         User updatedUser = userRepository.findByUserId(id);
+        updatedUser.setName(user.getName());
+        updatedUser.setEmail(user.getEmail());
+        updatedUser.setMobile(user.getMobile());
+        updatedUser.setGender(user.getGender());
+        updatedUser.setAge(user.getAge());
+        updatedUser.setNationality(user.getNationality());
         return userRepository.save(updatedUser);
     }
 }
