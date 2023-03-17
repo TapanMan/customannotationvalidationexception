@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -68,5 +69,10 @@ public class UserController {
     @PutMapping("/{uid}")
     public ResponseEntity<User> updateUser(@PathVariable int uid, @RequestBody User user) {
         return new ResponseEntity<>(service.updateUserDetails(uid, user), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{uid}")
+    public ResponseEntity<User> partiallyUpdateUser(@PathVariable int uid, @RequestBody Map<String, Object> fields) {
+        return new ResponseEntity<>(service.partiallyUpdateUser(uid, fields), HttpStatus.OK);
     }
 }

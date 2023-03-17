@@ -9,8 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -78,6 +81,16 @@ public class UserService {
         updatedUser.setGender(user.getGender());
         updatedUser.setAge(user.getAge());
         updatedUser.setNationality(user.getNationality());
+        return userRepository.save(updatedUser);
+    }
+
+    public User partiallyUpdateUser(int uid, Map<String, Object> fields) {
+        User updatedUser = userRepository.findByUserId(uid);
+        fields.forEach((key, value) -> {
+            Field field = ReflectionUtils.findField(User.class, key);
+            field.setAccessible(true);
+            ReflectionUtils.setField(field, updatedUser, value);
+        });
         return userRepository.save(updatedUser);
     }
 }
