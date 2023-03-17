@@ -32,12 +32,12 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable int id) throws UserNotFoundException {
-        return ResponseEntity.ok(service.getUser(id));
+        return ResponseEntity.ok(service.searchUser(id));
     }
 
     @GetMapping("/userid")
     public ResponseEntity<User> getUserById(@RequestParam(name = "userid") Integer id) throws UserNotFoundException {
-        return new ResponseEntity<>(service.getUser(id), HttpStatus.OK);
+        return new ResponseEntity<>(service.searchUser(id), HttpStatus.OK);
     }
 
     @GetMapping("/idandname")
