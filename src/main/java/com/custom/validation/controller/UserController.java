@@ -75,4 +75,10 @@ public class UserController {
     public ResponseEntity<User> partiallyUpdateUser(@PathVariable int uid, @RequestBody Map<String, Object> fields) {
         return new ResponseEntity<>(service.partiallyUpdateUser(uid, fields), HttpStatus.OK);
     }
+
+    @PutMapping("/nouid")
+    public ResponseEntity<User> updateUserNOId(@RequestBody User user) {
+        return new ResponseEntity<>(service.updateUserDetailsWithNoUserId(user), HttpStatus.OK);
+    }
+
 }

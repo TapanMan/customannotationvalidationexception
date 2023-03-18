@@ -93,4 +93,22 @@ public class UserService {
         });
         return userRepository.save(updatedUser);
     }
+
+    public User updateUserDetailsWithNoUserId(User user) {
+        List<User> users = userRepository.findAll();
+        User updatedUser = null;
+        for (User myUser : users) {
+            if (myUser.getUserId() == user.getUserId()) {
+                myUser.setName(user.getName());
+                myUser.setEmail(user.getEmail());
+                myUser.setMobile(user.getMobile());
+                myUser.setGender(user.getGender());
+                myUser.setAge(user.getAge());
+                myUser.setNationality(user.getNationality());
+                updatedUser = myUser;
+                break;
+            }
+        }
+        return userRepository.save(updatedUser);
+    }
 }
