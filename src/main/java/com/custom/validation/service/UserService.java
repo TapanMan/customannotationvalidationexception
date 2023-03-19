@@ -2,6 +2,7 @@ package com.custom.validation.service;
 
 import com.custom.validation.dto.UserRequest;
 import com.custom.validation.entity.User;
+import com.custom.validation.exception.UserNotFoundByEmailException;
 import com.custom.validation.exception.UserNotFoundException;
 import com.custom.validation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,5 +111,15 @@ public class UserService {
             }
         }
         return userRepository.save(updatedUser);
+    }
+
+    public User getUserByUserEmail(String userEmail) throws UserNotFoundByEmailException {
+        User userByEmail = userRepository.findByEmail(userEmail);
+        if (userByEmail != null) {
+            return userByEmail;
+        } else {
+            throw new UserNotFoundByEmailException("user not found by email :" + userEmail);
+        }
+
     }
 }

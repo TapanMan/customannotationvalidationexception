@@ -2,6 +2,7 @@ package com.custom.validation.controller;
 
 import com.custom.validation.dto.UserRequest;
 import com.custom.validation.entity.User;
+import com.custom.validation.exception.UserNotFoundByEmailException;
 import com.custom.validation.exception.UserNotFoundException;
 import com.custom.validation.service.UserService;
 import jakarta.validation.Valid;
@@ -81,4 +82,8 @@ public class UserController {
         return new ResponseEntity<>(service.updateUserDetailsWithNoUserId(user), HttpStatus.OK);
     }
 
+    @GetMapping("/user-email")
+    public ResponseEntity<User> getUserByUserEmail(@RequestParam(name = "user-email") String userEmail) throws UserNotFoundByEmailException {
+        return new ResponseEntity<>(service.getUserByUserEmail(userEmail), HttpStatus.OK);
+    }
 }
