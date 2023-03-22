@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * This Entity and it's component are for JWT only
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

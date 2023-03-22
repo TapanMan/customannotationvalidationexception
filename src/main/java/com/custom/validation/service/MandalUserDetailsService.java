@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+/**
+ * This service and it's component are for JWT only
+ */
 @Service
 public class MandalUserDetailsService implements UserDetailsService {
 
