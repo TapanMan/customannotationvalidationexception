@@ -41,21 +41,18 @@ public class SecurityConfig {
        provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
-
-    /**
-     * @Bean public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-     * http.authorizeHttpRequests((requests) -> requests.requestMatchers
-     * (new AntPathRequestMatcher("/opeanapi/openapi.yml")).
-     * permitAll().anyRequest().authenticated()).httpBasic();
-     * return http.build();
-     * }
-     **/
-    /**
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable().authorizeHttpRequests((requests) -> requests.requestMatchers
+                        (new AntPathRequestMatcher("/generate-token")).
+                permitAll().anyRequest().authenticated()).httpBasic();
+        return http.build();
+    }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-     **/
+
 
 
     /**
