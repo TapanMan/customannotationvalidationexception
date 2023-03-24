@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * This controller and it's component are for in built Paging and Sorting only
+ */
 @RestController
 public class UserPageSortController {
     @Autowired

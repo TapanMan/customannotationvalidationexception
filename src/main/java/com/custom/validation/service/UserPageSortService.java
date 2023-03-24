@@ -11,6 +11,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+/**
+ * This service and, it's component are for in built Paging and Sorting only
+ */
+
 @Service
 public class UserPageSortService {
     @Autowired
