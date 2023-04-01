@@ -34,7 +34,7 @@ public class MandalUserControllerTest {
     private UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken("Tapan", "pass1234");
 
     @Test
-    public void helloMandal(){
+    public void helloMandal() {
         String expected = "Before Jwt Test";
         String actual = userController.helloMandal();
         assertEquals(expected, actual);
@@ -49,13 +49,12 @@ public class MandalUserControllerTest {
         String testToken = userController.generateToken(authRequest);
         assertNotNull(testToken);
     }
-    // TODO - Work on this, this is not covering the exception part
+
     @Test
     public void generateTokenInvalid() throws Exception {
-        AuthRequest authRequest = MandalUserControllerFactory.getAuthRequest();
-        given(manager.authenticate(null)).willReturn(null);
-        given(jwtUtil.generateToken(null)).willReturn(null);
-        String testToken = userController.generateToken(authRequest);
-        assertNull(testToken);
+        Throwable exception = assertThrows(Exception.class, () -> {
+            userController.generateToken(null);
+        });
+        assertEquals("Invalid Username or Password", exception.getMessage());
     }
 }
