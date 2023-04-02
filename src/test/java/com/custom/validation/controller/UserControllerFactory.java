@@ -5,6 +5,7 @@ import com.custom.validation.entity.User;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class UserControllerFactory {
     public static UserRequest getUserRequest() {
@@ -52,5 +53,17 @@ public class UserControllerFactory {
 
         List<User> users = Arrays.asList(user1, user2);
         return users;
+    }
+    public static Optional<User> getUserOptional() {
+        User user = new User();
+        user.setUserId(1);
+        user.setName("Tapan");
+        user.setEmail("tapan.tapan@gmail.com");
+        user.setMobile("1234567891");
+        user.setGender("Male");
+        user.setAge(45);
+        user.setNationality("India");
+        Optional<User> optionalUser = Optional.of(user);
+        return optionalUser;
     }
 }
