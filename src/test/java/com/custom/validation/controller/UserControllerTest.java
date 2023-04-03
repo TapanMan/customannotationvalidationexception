@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
@@ -39,6 +40,7 @@ class UserControllerTest {
         given(service.saveUser(request)).willReturn(user);
         ResponseEntity<User> response = controller.saveUser(request);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -47,6 +49,7 @@ class UserControllerTest {
         given(service.getAllUsers()).willReturn(users);
         ResponseEntity<List<User>> response = controller.getAll();
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -56,6 +59,7 @@ class UserControllerTest {
         given(service.searchUser(userId)).willReturn(user);
         ResponseEntity<User> response = controller.getUser(userId);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     // TODO - Not Working
@@ -76,6 +80,7 @@ class UserControllerTest {
         given(service.searchUser(userId)).willReturn(user);
         ResponseEntity<User> response = controller.getUserById(userId);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -86,6 +91,7 @@ class UserControllerTest {
         given(service.getUserByUserIdAndName(userId, username)).willReturn(user);
         ResponseEntity<User> response = controller.getUserByUserIdAndName(userId, username);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -96,6 +102,7 @@ class UserControllerTest {
         given(service.getUserByUserIdAndNameStream(userId, username)).willReturn(optionalUser);
         ResponseEntity<Optional<User>> response = controller.getUserByUserIdAndNameJava8(userId, username);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -105,6 +112,7 @@ class UserControllerTest {
         given(service.sortFields(filedName)).willReturn(users);
         ResponseEntity<List<User>> response = controller.sortingFields(filedName);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -116,6 +124,7 @@ class UserControllerTest {
         given(service.userPagination(pageNumber, pageSize)).willReturn(page);
         ResponseEntity<Page<User>> response = controller.userPagination(pageNumber, pageSize);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -128,6 +137,7 @@ class UserControllerTest {
         given(service.userPaginationAndSorting(pageNumber, pageSize, fieldName)).willReturn(page);
         ResponseEntity<Page<User>> response = controller.userPaginationAndSorting(pageNumber, pageSize, fieldName);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -137,6 +147,7 @@ class UserControllerTest {
         given(service.updateUserDetails(userId, user)).willReturn(user);
         ResponseEntity<User> response = controller.updateUser(userId, user);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -147,6 +158,7 @@ class UserControllerTest {
         given(service.partiallyUpdateUser(userId, fields)).willReturn(user);
         ResponseEntity<User> response = controller.partiallyUpdateUser(userId, fields);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -155,6 +167,7 @@ class UserControllerTest {
         given(service.updateUserDetailsWithNoUserId(user)).willReturn(user);
         ResponseEntity<User> response = controller.updateUserNOId(user);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test
@@ -164,5 +177,6 @@ class UserControllerTest {
         given(service.getUserByUserEmail(userEmail)).willReturn(user);
         ResponseEntity<User> response = controller.getUserByUserEmail(userEmail);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response);
     }
 }

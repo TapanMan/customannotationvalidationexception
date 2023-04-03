@@ -33,6 +33,6 @@ class UserPageSortControllerTest {
         given(userPageSortService.pageSortAllUsers(pageNumber, pageSize, fieldName)).willReturn(users);
         ResponseEntity<List<User>> response = pageSortController.userPageSortAll(pageNumber, pageSize,fieldName);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-
+        assertNotNull(response);
     }
 }
