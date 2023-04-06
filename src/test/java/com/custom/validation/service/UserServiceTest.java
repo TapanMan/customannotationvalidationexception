@@ -217,6 +217,8 @@ class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Invalid Email")
+    @Order(7)
     void getUserByUserEmailInvalid() {
         String email = null;
         Throwable exception = assertThrows(UserNotFoundByEmailException.class, () -> {
