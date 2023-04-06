@@ -5,10 +5,7 @@ import com.custom.validation.entity.User;
 import com.custom.validation.exception.UserNotFoundByEmailException;
 import com.custom.validation.exception.UserNotFoundException;
 import com.custom.validation.repository.UserRepository;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DynamicTest;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -18,10 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -31,6 +25,37 @@ import static org.springframework.data.domain.Sort.Direction.ASC;
 
 @ExtendWith(SpringExtension.class)
 class UserServiceTest {
+    private static User usermandal;
+    private static User usermandal1;
+    private static List<User> usermandalLists;
+    @BeforeAll
+    public static void setUp(){
+
+        // This can be written in a builder pattern with Arrays.asList way
+
+        // This is a very bad code
+        usermandal = new User();
+        usermandal.setUserId(1);
+        usermandal.setName("Tapan");
+        usermandal.setEmail("tapan.tapan@gmail.com");
+        usermandal.setMobile("1234567891");
+        usermandal.setGender("Male");
+        usermandal.setAge(46);
+        usermandal.setNationality("India");
+
+        usermandalLists = new ArrayList<>();
+
+        usermandal1 = new User();
+        usermandal1.setUserId(1);
+        usermandal1.setName("Tapan");
+        usermandal1.setEmail("tapan.tapan@gmail.com");
+        usermandal1.setMobile("1234567891");
+        usermandal1.setGender("Male");
+        usermandal1.setAge(46);
+        usermandal1.setNationality("India");
+        usermandalLists.add(usermandal);
+        usermandalLists.add(usermandal1);
+    }
 
     @InjectMocks
     UserService service;
@@ -95,16 +120,15 @@ class UserServiceTest {
         return users.stream().map(user -> DynamicTest.dynamicTest("User Id ", () -> assertEquals(userId, user.getUserId())));
     }
 
-    @Disabled // TODO - Not working as expected
     @Test
     public void getUserByUserIdAndNameLoop() {
         int userId = 1;
         String userName = "Tapan";
         List<User> users = UserServiceFactory.getUserList();
         User user = repository.findByUserId(userId);
-        assertAll("Mandal User Id and Name",
-                () -> assertEquals(1, user.getUserId()),
-                () -> assertEquals("Tapan", user.getName())
+        assertAll("Mandal User Id and Name Test",
+                () -> assertEquals(userId, usermandal.getUserId()),
+                () -> assertEquals(userName, usermandal.getName())
         );
     }
 
@@ -150,22 +174,20 @@ class UserServiceTest {
         assertNotNull(result);
     }
 
-    @Disabled // Giving Null for all the Disabled
     @Test
     void updateUserDetails() {
         int userId = 1;
-        User user = repository.findByUserId(userId);
-        given(repository.findByUserId(userId)).willReturn(user);
+        User user = usermandal;
+        given(repository.findByUserId(usermandal.getUserId())).willReturn(user);
         given(repository.save(user)).willReturn(user);
         User result = service.updateUserDetails(userId, user);
         assertNotNull(result);
     }
 
-    @Disabled
     @Test
     void partiallyUpdateUser() {
         int uid = 1;
-        User user = repository.findByUserId(uid);
+        User user = usermandal;
         Map<String, Object> fields = new HashMap<>();
         given(repository.findByUserId(uid)).willReturn(user);
         given(repository.save(user)).willReturn(user);
@@ -173,22 +195,22 @@ class UserServiceTest {
         assertNotNull(userUpdated);
     }
 
-    @Disabled
+
     @Test
     void updateUserDetailsWithNoUserId() {
         int uid = 1;
-        User user = repository.findByUserId(uid);
-        List<User> users = UserServiceFactory.getUserList();
+        User user = usermandal;
+        List<User> users = usermandalLists;
         given(repository.findAll()).willReturn(users);
         given(repository.save(user)).willReturn(user);
         User result = service.updateUserDetailsWithNoUserId(user);
         assertNotNull(result);
     }
-    @Disabled
+
     @Test
     void getUserByUserEmail() throws UserNotFoundByEmailException {
         String email = "tapan.tapan@gmail.com";
-        User user = repository.findByEmail(email);
+        User user = usermandal;
         given(repository.findByEmail(email)).willReturn(user);
         User result = service.getUserByUserEmail(email);
         assertNotNull(result);
