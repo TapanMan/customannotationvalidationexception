@@ -11,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
 @ExtendWith(SpringExtension.class)
@@ -49,12 +51,12 @@ class UserServiceTest {
         usermandalLists = new ArrayList<>();
 
         usermandal1 = new User();
-        usermandal1.setUserId(1);
-        usermandal1.setName("Tapan");
-        usermandal1.setEmail("tapan.tapan@gmail.com");
-        usermandal1.setMobile("1234567891");
+        usermandal1.setUserId(2);
+        usermandal1.setName("Dillip");
+        usermandal1.setEmail("dillip.tapan@gmail.com");
+        usermandal1.setMobile("2234567891");
         usermandal1.setGender("Male");
-        usermandal1.setAge(46);
+        usermandal1.setAge(41);
         usermandal1.setNationality("India");
         usermandalLists.add(usermandal);
         usermandalLists.add(usermandal1);
@@ -127,11 +129,30 @@ class UserServiceTest {
     public void getUserByUserIdAndNameLoop() {
         int userId = 1;
         String userName = "Tapan";
-        List<User> users = UserServiceFactory.getUserList();
-        User user = repository.findByUserId(userId);
+
+        User user = UserServiceFactory.getUser();
+
+        List<User> mockList = Mockito.mock(List.class);
+        Iterator<User> mockIter = Mockito.mock(Iterator.class);
+        when(mockList.iterator()).thenReturn(mockIter);
+        when(mockIter.hasNext()).thenReturn(true);
+        when(mockIter.next()).thenReturn(user);
+        for(User myUser: usermandalLists){
+            if(myUser.getUserId() == userId && myUser.getName().equalsIgnoreCase(userName)){
+                user = myUser;
+                assertNotNull(user);
+            }
+        }
+
+
+
+        User mandalUser = new User();
+        mandalUser.setUserId(20);
+        boolean notContainUser = mandalUserLists().contains(mandalUser);
+        assertFalse(notContainUser);
         assertAll("Mandal User Id and Name Test",
-                () -> assertEquals(userId, usermandal.getUserId()),
-                () -> assertEquals(userName, usermandal.getName())
+                () -> assertEquals(userId, usermandalLists.get(0).getUserId()),
+                () -> assertEquals(userName, usermandalLists.get(0).getName())
         );
     }
 
@@ -201,6 +222,9 @@ class UserServiceTest {
         mandalUserDetails.setGender("Male");
         mandalUserDetails.setAge(50);
         mandalUserDetails.setNationality("India");
+        // The following is for foreach loop test - iterate the list of user and check the user there
+        boolean isContain = mandalUserLists().contains(mandalUserDetails);
+        assertTrue(isContain);
 
         assertAll("Mandal User From Mandal User List",
                 () -> assertEquals(mandalUserLists().get(0).getUserId(), mandalUserDetails.getUserId()),
