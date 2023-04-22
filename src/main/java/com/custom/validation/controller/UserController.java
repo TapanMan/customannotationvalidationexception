@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @RestController
 public class UserController {
@@ -22,8 +23,11 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    private Logger logger = Logger.getLogger(UserController.class.getName());
+
     @PostMapping("/signup")
     public ResponseEntity<User> saveUser(@RequestBody @Valid UserRequest userRequest) {
+        logger.info("Saving a User Request");
         return new ResponseEntity<>(service.saveUser(userRequest), HttpStatus.CREATED);
     }
 

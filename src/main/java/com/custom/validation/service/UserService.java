@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 public class UserService {
@@ -23,12 +24,15 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    private Logger logger = Logger.getLogger(UserService.class.getName());
+
     public User saveUser(UserRequest request) {
         User user = User.build(0, request.getName(), request.getEmail(), request.getMobile(), request.getGender(), request.getAge(), request.getNationality());
         return userRepository.save(user);
     }
 
     public List<User> getAllUsers() {
+        logger.info("Calling the database and fetching the User Records");
         return userRepository.findAll();
     }
 
