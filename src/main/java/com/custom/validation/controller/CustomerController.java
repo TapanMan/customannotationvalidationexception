@@ -35,4 +35,9 @@ public class CustomerController {
     public Customer getCustomerByCustomerName(@RequestParam(name = "cust-name") String customerName) {
         return service.getCustomerByName(customerName);
     }
+
+    @GetMapping("/customer-name-address")
+    public Customer getCustomerByCustomerNameAndAddress(@RequestParam(name = "cust-name") String customerName, @RequestParam(name = "cust-addr") String address) {
+        return service.getCustomerByNameAddress(customerName, address);
+    }
 }

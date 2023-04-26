@@ -13,4 +13,8 @@ public class CustomerService {
     public Customer getCustomerByName(String customerName) {
         return repository.getCustomerByCustomerName(customerName);
     }
+
+    public Customer getCustomerByNameAddress(String customerName, String address) {
+        return repository.getCustomerByNameAndAddress(customerName, address);
+    }
 }

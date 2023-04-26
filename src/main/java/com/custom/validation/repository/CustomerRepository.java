@@ -11,4 +11,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     // This is SQL [select * from customers where customer_name =], The table name and column name must match
     @Query(value = "select * from customers where customer_name =:custName", nativeQuery = true)
     Customer getCustomerByCustomerName(String custName);
+
+    @Query(value = "select * from customers where customer_name =:custName and address =:addr", nativeQuery = true)
+    Customer getCustomerByNameAndAddress(String custName, String addr);
 }
