@@ -23,4 +23,8 @@ public class CustomerService {
     public List<Customer> getCustomerByContactAndCity(String contactName, String city) {
         return repository.getCustomerByContactNameAndCity(contactName, city);
     }
+
+    public List<Customer> getAllCustomer() {
+        return repository.getAllCustomer();
+    }
 }

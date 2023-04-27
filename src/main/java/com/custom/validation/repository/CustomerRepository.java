@@ -27,4 +27,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     List<Customer> getCustomerByContactNameAndCity(@Param("contName") String contactName, @Param("ct") String city);
     // Declare the variable in a proper way, this is not a valid [cust-Name] String property, and the application will fail
 
+    // No need to write @Entity(name="XXX") something in the Entity or POJO
+    @Query("select c from Customer c")
+    public List<Customer> getAllCustomer();
+
 }

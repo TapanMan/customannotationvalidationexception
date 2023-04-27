@@ -45,4 +45,9 @@ public class CustomerController {
     public List<Customer> getCustomerByContactNamesAndCity(@RequestParam(name = "customer-name") String custName, @RequestParam(name = "city") String city) {
         return service.getCustomerByContactAndCity(custName, city);
     }
+
+    @GetMapping("/all-customers")
+    public List<Customer> getAllCustomerDetails() {
+        return service.getAllCustomer();
+    }
 }
