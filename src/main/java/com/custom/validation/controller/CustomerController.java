@@ -40,4 +40,9 @@ public class CustomerController {
     public Customer getCustomerByCustomerNameAndAddress(@RequestParam(name = "cust-name") String customerName, @RequestParam(name = "cust-addr") String address) {
         return service.getCustomerByNameAddress(customerName, address);
     }
+
+    @GetMapping("/customer-name-city")
+    public List<Customer> getCustomerByContactNamesAndCity(@RequestParam(name = "customer-name") String custName, @RequestParam(name = "city") String city) {
+        return service.getCustomerByContactAndCity(custName, city);
+    }
 }
