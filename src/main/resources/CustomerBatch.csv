@@ -1,0 +1,13 @@
+id,firstName,lastName,email,gender,contactNumber,country,dateOfBirth 
+1,"Tapan","Mandal","tapan.mandal@gmail.com","Male",9742123451,"India",03-05-1212
+2,"Dillip","Mandal","dillip.mandal@gmail.com","Male",9742123458,"India",03-05-1217
+3,"Payal","Mandal","payal.mandal@gmail.com","Female",9742123452,"India",03-05-1214
+5,"Pankaj","Mandal","pankaj.mandal@gmail.com","Male",9742123456,"India",03-05-1216
+6,"Divya","Mandal","divya.mandal@gmail.com","Female",9742128452,"India",03-05-1224
+7,"Renuka","Mandal","renuka.mandal@gmail.com","Female",9342128452,"India",03-05-2224
+8,"Kanika","Mandal","kanika.mandal@gmail.com","Female",8742128452,"India",02-05-1224
+9,"Sumitra","Mandal","sumitra.mandal@gmail.com","Female",9782128452,"India",03-06-1224
+10,"Dipali","Mandal","dipali.mandal@gmail.com","Female",9882128452,"India",23-06-1224
+
+
+
