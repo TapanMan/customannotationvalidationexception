@@ -114,17 +114,6 @@ class UserServiceTest {
         User result = service.getUserByUserIdAndName(userId, userName);
         assertNotNull(result);
     }
-
-    @Disabled // TODO - Not Working as expected
-    @TestFactory
-    Stream<DynamicTest> getUserByUserIdAndNameDynamic() {
-        int userId = 1;
-        // String userName ="Tapan";
-        List<User> users = UserServiceFactory.getUserList();
-        given(repository.findAll()).willReturn(users);
-        return users.stream().map(user -> DynamicTest.dynamicTest("User Id ", () -> assertEquals(userId, user.getUserId())));
-    }
-
     @Test
     public void getUserByUserIdAndNameLoop() {
         int userId = 1;
