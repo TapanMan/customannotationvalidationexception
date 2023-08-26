@@ -50,4 +50,10 @@ public class CustomerController {
     public List<Customer> getAllCustomerDetails() {
         return service.getAllCustomer();
     }
+
+
+    @GetMapping("/column-names")
+    public List<String> getAllColumnNames() {
+        return service.getAllColumnNames();
+    }
 }
