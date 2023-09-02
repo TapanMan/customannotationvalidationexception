@@ -50,11 +50,11 @@ public class CustomerService {
 
     public Customer addCustomerForSpecificProperty() {
         Customer customer = new Customer();
-        customer.setCustomerId(123);
+        customer.setCustomerId(123); // Needs to be changed when you send a request
         customer.setCustomerName("Tony");
         customer.setAddress("London");
         customer.setContactName("Hello Tony");
-        customer.setCity("Downing Street London");
+        customer.setCity("D-Street London");
         customer.setPostalCode(457896);
         customer.setCountry("UK");
         return repository.save(customer);
