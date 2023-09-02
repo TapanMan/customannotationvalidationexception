@@ -47,4 +47,16 @@ public class CustomerService {
         }
         return columns;
     }
+
+    public Customer addCustomerForSpecificProperty() {
+        Customer customer = new Customer();
+        customer.setCustomerId(123);
+        customer.setCustomerName("Tony");
+        customer.setAddress("London");
+        customer.setContactName("Hello Tony");
+        customer.setCity("Downing Street London");
+        customer.setPostalCode(457896);
+        customer.setCountry("UK");
+        return repository.save(customer);
+    }
 }
