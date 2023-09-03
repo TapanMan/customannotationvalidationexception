@@ -66,4 +66,9 @@ public class CustomerService {
         List<Customer> customers = repository.findAll();
         return customers.stream().sorted(Comparator.comparing(Customer::getCustomerName)).collect(Collectors.toList());
     }
+
+    public List<Customer> sortByNameThenAddress() {
+        List<Customer> customers = repository.findAll();
+        return customers.stream().sorted(Comparator.comparing(Customer::getCustomerName).thenComparing(Customer::getAddress)).collect(Collectors.toList());
+    }
 }
