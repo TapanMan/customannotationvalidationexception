@@ -7,7 +7,9 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -44,8 +46,9 @@ public class CustomerOrder {
     @Column(name = "COUNTRY")
     private String country;
 
+    @CreationTimestamp
     @Column(name = "ORDER_DATE")
-    private Date orderDate;
+    private LocalDateTime orderDate;
 
     @Override
     public String toString() {
