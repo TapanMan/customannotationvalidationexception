@@ -62,4 +62,9 @@ public class CustomerController {
     public Customer addCustomerWithoutRequestBody() {
         return service.addCustomerForSpecificProperty();
     }
+
+    @GetMapping("/sort-by-name")
+    public List<Customer> sortCustomerByName() {
+        return service.sortByName();
+    }
 }

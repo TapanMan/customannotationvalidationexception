@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
@@ -58,5 +60,10 @@ public class CustomerService {
         customer.setPostalCode(457896);
         customer.setCountry("UK");
         return repository.save(customer);
+    }
+
+    public List<Customer> sortByName() {
+        List<Customer> customers = repository.findAll();
+        return customers.stream().sorted(Comparator.comparing(Customer::getCustomerName)).collect(Collectors.toList());
     }
 }
