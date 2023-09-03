@@ -22,8 +22,10 @@ public class CustomerOrderService {
         List<CustomerOrder> customerOrders = customerOrderRepository.findAll();
         for (CustomerOrder customerOrder : customerOrders) {
             LocalDateTime orderDate = customerOrder.getOrderDate();
-            orderDate.format(dateTimeFormatter);
-            customerOrder.setOrderDate(orderDate);
+            String currentDate = dateTimeFormatter.format(orderDate);
+            currentDate.replace('T', ' ');
+            customerOrder.setOrderDate(LocalDateTime.parse(currentDate, dateTimeFormatter));
+            customerOrderRepository.save(customerOrder);
         }
         return customerOrders;
     }
