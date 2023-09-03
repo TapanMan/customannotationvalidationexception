@@ -72,4 +72,9 @@ public class CustomerController {
     public List<Customer> sortCustomerByNameThenAddress() {
         return service.sortByNameThenAddress();
     }
+
+    @GetMapping("/sort-by-city")
+    public List<Customer> sortCustomerByCity() {
+        return service.sortByCity();
+    }
 }
