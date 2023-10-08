@@ -20,7 +20,15 @@ public class Employee implements Comparable<Employee> {
 
     @Override
     public int compareTo(Employee emp) {
-        int result = Integer.compare(this.getAge(), emp.getAge());
+         int result = Integer.compare(this.getAge(), emp.getAge());
+        /*int result = this.getName().compareTo(emp.getName());
+        if (result == 0) {
+            result = Integer.compare(this.getAge(), emp.getAge());
+            if (result == 0) {
+                return Integer.compare(this.getExp(), emp.getExp());
+            }
+            return result;
+        }*/
         return result;
     }
 }
