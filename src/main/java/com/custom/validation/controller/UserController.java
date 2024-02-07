@@ -4,6 +4,7 @@ import com.custom.validation.dto.UserRequest;
 import com.custom.validation.entity.User;
 import com.custom.validation.exception.UserNotFoundByEmailException;
 import com.custom.validation.exception.UserNotFoundException;
+import com.custom.validation.repository.UserRepository;
 import com.custom.validation.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private Logger logger = Logger.getLogger(UserController.class.getName());
 
@@ -89,5 +93,22 @@ public class UserController {
     @GetMapping("/user-email")
     public ResponseEntity<User> getUserByUserEmail(@RequestParam(name = "user-email") String userEmail) throws UserNotFoundByEmailException {
         return new ResponseEntity<>(service.getUserByUserEmail(userEmail), HttpStatus.OK);
+    }
+
+    @PutMapping("/user/{id}")
+    public ResponseEntity<User> updateUserRightWay(@PathVariable int id, @RequestBody User user) throws UserNotFoundException {
+        User updateUser = userRepository.findByUserId(id);
+        if (updateUser == null) {
+            throw new UserNotFoundException("User Not Found with id :" + id);
+        } else {
+            updateUser.setName(user.getName());
+            updateUser.setEmail(user.getEmail());
+            updateUser.setMobile(user.getMobile());
+            updateUser.setGender(user.getGender());
+            updateUser.setAge(user.getAge());
+            updateUser.setNationality(user.getNationality());
+            userRepository.save(updateUser);
+            return ResponseEntity.ok(updateUser);
+        }
     }
 }
