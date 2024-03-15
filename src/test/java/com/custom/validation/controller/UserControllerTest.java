@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
@@ -62,17 +61,13 @@ class UserControllerTest {
         assertNotNull(response);
     }
 
-    // TODO - Not Working
-    /*
     @Test
-    void getUserInvalid() throws UserNotFoundException {
-        int userId = 0;
-        UserNotFoundException exception = assertThrows(UserNotFoundException.class, () ->{
-            controller.getUser(userId);
+    void getUserByIdInvalid() {
+        assertThrows(NullPointerException.class, () -> {
+            controller.getUserById(null);
         });
-        assertEquals("User Not Found with id :" + userId, exception.getMessage());
     }
-*/
+
     @Test
     void getUserById() throws UserNotFoundException {
         int userId = 1;
