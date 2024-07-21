@@ -9,9 +9,7 @@ public class DatabaseConnection {
 
     private static final Logger logger = Logger.getLogger(DatabaseConnection.class.getName());
 
-    // String url = GetValueFromProperty.getValue("jdbc:oracle:thin:@localhost:1521:xe");
-    // String user = GetValueFromProperty.getValue("spring.datasource.username");
-   //  String password = GetValueFromProperty.getValue("spring.datasource.password");
+  // Read the value from the application properties file, Must not hard code
 
     String url = "jdbc:oracle:thin:@localhost:1521:xe";
     String user = "system";
@@ -39,10 +37,4 @@ public class DatabaseConnection {
     public Connection getConnection() {
         return connection;
     }
-
-    // Other database-related methods
-    public void executeQuery(String query) {
-        // ...
-    }
-
 }
