@@ -12,7 +12,8 @@ public class SingletonDesignPattern {
     public void getDataFromConnection() {
         DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         Connection connection = databaseConnection.getConnection();
-
+        // In one line, we can write
+       // Connection connection = DatabaseConnection.getInstance().getConnection();
         // Use the connection to execute queries or perform database operations
         try {
             Statement statement = connection.createStatement();
