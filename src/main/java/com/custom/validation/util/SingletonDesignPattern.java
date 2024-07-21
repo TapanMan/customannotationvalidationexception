@@ -21,7 +21,14 @@ public class SingletonDesignPattern {
             // Process the result set
             while (resultSet.next()) {
                 // Fill the data
-                String name = resultSet.getString("");
+                String userId = resultSet.getString("USER_ID");
+                String name = resultSet.getString("NAME");
+                String email = resultSet.getString("EMAIL");
+                String mobile = resultSet.getString("MOBILE");
+                String gender = resultSet.getString("GENDER");
+                String age = resultSet.getString("AGE");
+                String nationality = resultSet.getString("NATIONALITY");
+                System.out.println(userId + " " + name + " " + email + " " + mobile + " " + gender + " " + age + " " + nationality);
             }
 
             // Close the result set, statement, and connection
@@ -34,6 +41,7 @@ public class SingletonDesignPattern {
     }
 
     public static void main(String[] args) {
-
+        SingletonDesignPattern singletonDesignPattern = new SingletonDesignPattern();
+        singletonDesignPattern.getDataFromConnection();
     }
 }
